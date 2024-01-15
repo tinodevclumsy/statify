@@ -55,6 +55,7 @@ const Home = () => {
         <ProfileCard
           username={user.display_name}
           profile_image={user.images[1].url}
+          uri={user.uri}
         />
       )}
 

@@ -29,3 +29,18 @@ export const getPlaylists = (code) => {
       });
   });
 };
+
+export const getPlayListDetail = ({ id }) => {
+  return new Promise((resolve, reject) => {
+    api
+      .get(`/playlists/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          resolve(res.data);
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

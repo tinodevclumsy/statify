@@ -26,14 +26,16 @@ const UserName = styled.h2`
   margin: 10px 0;
 `;
 
-const ProfileCard = ({ profile_image, username }) => {
+const ProfileCard = ({ profile_image, username, uri }) => {
   return (
     <Card>
       <ProfileImage>
         <img src={profile_image} alt="User Profile" />
       </ProfileImage>
       <UserName>{username}</UserName>
-      <LinkButton>View on Spotify</LinkButton>
+      <LinkButton href={uri} target="_blank">
+        View on Spotify
+      </LinkButton>
     </Card>
   );
 };

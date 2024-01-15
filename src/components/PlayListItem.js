@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 const Title = styled.h3`
   font-size: 20px;
   opacity: 0.7;
