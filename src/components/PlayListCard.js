@@ -26,6 +26,7 @@ const PlayListName = styled.h2`
 
 const OwnerName = styled.h4`
   margin: 10px 0 0;
+  font-weight: 400;
 `;
 
 const Detail = styled.div`

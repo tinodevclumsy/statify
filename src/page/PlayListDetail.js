@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { getPlayListDetail } from "../api/SpotifyAPI";
 import PlayListCard from "../components/PlayListCard";
 import TrackList from "../components/TrackList";
 import styled from "styled-components";
+import LinkButton from "../components/common/Link";
 
 const Container = styled.div`
   max-width: 1280px;
@@ -26,8 +27,10 @@ const Background = styled.div`
 
 const PlayListDetail = () => {
   const { id } = useParams();
+  // const boardRef = useRef(null);
 
   const [detail, setDetail] = useState();
+  // const [board, setBoard] = useState([]);
 
   useEffect(() => {
     getPlayListDetail({ id }).then((res) => {
@@ -35,6 +38,10 @@ const PlayListDetail = () => {
       setDetail(res);
     });
   }, []);
+
+  // const onTrackClick = (item) => {
+  //   setBoard((prevItems) => [...prevItems, item]);
+  // };
 
   return (
     <Container>
@@ -45,7 +52,10 @@ const PlayListDetail = () => {
             thumbnail={detail.images.length && detail.images[0].url}
             owner={detail.owner.display_name}
           ></PlayListCard>
-          <TrackList data={detail.tracks.items} />
+          <div style={{ textAlign: "center", padding: '20px' }}>
+            <LinkButton>Create a Board</LinkButton>
+          </div>
+          <TrackList data={detail.tracks.items} onTrackClick={() => {}} />
           <Background
             style={{ backgroundImage: `url(${detail.images[0].url})` }}
           />

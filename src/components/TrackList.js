@@ -1,13 +1,13 @@
 import React from "react";
 import TrackListItem from "./TrackListItem";
 
-const TrackList = ({ data }) => {
+const TrackList = ({ data, onTrackClick }) => {
   return (
-    <table style={{ width: "100%", marginTop: "20px" }}>
+    <table style={{ width: "100%" }}>
       <tbody>
         {data &&
           data.map((ele, key) => {
-            return <TrackListItem key={`track-${key}`} track={ele.track} />;
+            return <TrackListItem key={`track-${key}`} track={ele.track} onTrackClick={onTrackClick}/>;
           })}
       </tbody>
     </table>

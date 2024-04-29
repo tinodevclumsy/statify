@@ -6,6 +6,7 @@ const LinkButton = styled.a`
   padding: 15px;
   border-radius: 35px;
   color: ${(props) => props.theme.primary};
+  text-align: center;
 `;
 
 export default LinkButton;

@@ -32,7 +32,7 @@ const ListCell = styled.td`
   padding: 15px;
 `;
 
-const TrackListItem = ({ track }) => {
+const TrackListItem = ({ track, onTrackClick }) => {
   const { album, artists, name } = track;
 
   const getArists = () => {
@@ -40,7 +40,7 @@ const TrackListItem = ({ track }) => {
   };
 
   return (
-    <ListRow>
+    <ListRow onClick={() => onTrackClick(album.images[0].url)}>
       <ThumbnailCell>
         <Thumbnail>
           <img src={album.images.length && album.images[0].url} />
