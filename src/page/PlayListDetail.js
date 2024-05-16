@@ -27,21 +27,38 @@ const Background = styled.div`
 
 const PlayListDetail = () => {
   const { id } = useParams();
-  // const boardRef = useRef(null);
 
   const [detail, setDetail] = useState();
-  // const [board, setBoard] = useState([]);
+  const [group, setGroup] = useState();
 
   useEffect(() => {
     getPlayListDetail({ id }).then((res) => {
       console.log(res);
       setDetail(res);
+      console.log(filterTracks(res.tracks.items));
+      setGroup(filterTracks(res.tracks.items));
     });
   }, []);
 
-  // const onTrackClick = (item) => {
-  //   setBoard((prevItems) => [...prevItems, item]);
-  // };
+  function filterTracks(tracks) {
+    return tracks.reduce((arr, crr) => {
+      const id = crr.track.album.id;
+      if (!arr[id]) {
+        arr[id] = {
+          name: crr.track.album.name,
+          thumbnail: crr.track.album.images,
+          tracks: [{ name: crr.track.name, artists: crr.track.artists }],
+        };
+      } else {
+        arr[id].tracks.push({
+          name: crr.track.name,
+          artists: crr.track.artists,
+        });
+      }
+
+      return arr;
+    }, {});
+  }
 
   return (
     <Container>
@@ -52,10 +69,10 @@ const PlayListDetail = () => {
             thumbnail={detail.images.length && detail.images[0].url}
             owner={detail.owner.display_name}
           ></PlayListCard>
-          <div style={{ textAlign: "center", padding: '20px' }}>
+          <div style={{ textAlign: "center", padding: "20px" }}>
             <LinkButton>Create a Board</LinkButton>
           </div>
-          <TrackList data={detail.tracks.items} onTrackClick={() => {}} />
+          <TrackList data={group} onTrackClick={() => {}} />
           <Background
             style={{ backgroundImage: `url(${detail.images[0].url})` }}
           />

@@ -10,16 +10,6 @@ const Title = styled.h4`
   color: #fff;
 `;
 
-const Artist = styled.h5`
-  color: #fff;
-  opacity: 0.6;
-`;
-
-const Album = styled.h5`
-  color: #fff;
-  opacity: 0.6;
-`;
-
 const ListRow = styled.tr`
   background-color: rgba(0, 0, 0, 0.4);
 `;
@@ -28,33 +18,65 @@ const ThumbnailCell = styled.td`
   width: 150px;
 `;
 
-const ListCell = styled.td`
-  padding: 15px;
+const CheckBox = styled.input`
+  accent-color: ${(props) => props.theme.primary};
+  width: 18px;
+  height: 18px;
 `;
 
-const TrackListItem = ({ track, onTrackClick }) => {
-  const { album, artists, name } = track;
+const ListCell = styled.td`
+  min-height: 150px;
+  padding: 15px;
+  color: #fff;
+`;
 
-  const getArists = () => {
+const TrackCell = styled.td`
+  color: #fff;
+  padding: 15px;
+  font-size: 13px;
+  opacity: 0.8;
+  font-weight: 500;
+`;
+
+const TrackListItem = ({ item, onTrackClick }) => {
+  const { name, thumbnail, tracks } = item;
+
+  const getArists = (artists) => {
     return artists.map((ele) => ele.name);
   };
 
   return (
-    <ListRow onClick={() => onTrackClick(album.images[0].url)}>
-      <ThumbnailCell>
-        <Thumbnail>
-          <img src={album.images.length && album.images[0].url} />
-        </Thumbnail>
-      </ThumbnailCell>
-      <ListCell>
-        <Title>{name}</Title>
-        <Artist>{getArists()}</Artist>
-      </ListCell>
-      <ListCell>
-        <Album>{album.name}</Album>
-      </ListCell>
-      {/* <ListCell>Action</ListCell> */}
-    </ListRow>
+    <>
+      <ListRow onClick={() => onTrackClick(thumbnail[0].url)}>
+        <ListCell style={{ textAlign: "center" }}>
+          <CheckBox type="checkbox" />
+        </ListCell>
+        <ThumbnailCell>
+          <Thumbnail>
+            <img
+              alt={`Album-${name}`}
+              src={thumbnail.length && thumbnail[0].url}
+            />
+          </Thumbnail>
+        </ThumbnailCell>
+        <ListCell>
+          <Title>{name}</Title>
+        </ListCell>
+        <ListCell style={{ textAlign: "center" }}>Action</ListCell>
+      </ListRow>
+      {tracks.map((track, key) => {
+        return (
+          <ListRow key={`track-${name}-${key}`}>
+            <TrackCell></TrackCell>
+            <TrackCell></TrackCell>
+            <TrackCell>
+              #{++key}. {track.name} - {getArists(track.artists)}
+            </TrackCell>
+            <TrackCell></TrackCell>
+          </ListRow>
+        );
+      })}
+    </>
   );
 };
 
