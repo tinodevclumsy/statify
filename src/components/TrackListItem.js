@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Thumbnail = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 85px;
+  height: 85px;
 `;
 
 const Title = styled.h4`
@@ -15,7 +15,7 @@ const ListRow = styled.tr`
 `;
 
 const ThumbnailCell = styled.td`
-  width: 150px;
+  width: 85px;
 `;
 
 const CheckBox = styled.input`
@@ -25,7 +25,6 @@ const CheckBox = styled.input`
 `;
 
 const ListCell = styled.td`
-  min-height: 150px;
   padding: 15px;
   color: #fff;
 `;

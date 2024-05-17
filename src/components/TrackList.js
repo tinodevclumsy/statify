@@ -23,10 +23,10 @@ const TrackList = ({ data, onTrackClick }) => {
       </thead>
       <tbody>
         {data &&
-          Object.entries(data).map(([key, value]) => {
+          data.map(([id, value]) => {
             return (
               <TrackListItem
-                key={`track-${key}`}
+                key={`album-${id}`}
                 item={value}
                 onTrackClick={onTrackClick}
               />

@@ -33,31 +33,29 @@ const PlayListDetail = () => {
 
   useEffect(() => {
     getPlayListDetail({ id }).then((res) => {
-      console.log(res);
       setDetail(res);
-      console.log(filterTracks(res.tracks.items));
-      setGroup(filterTracks(res.tracks.items));
+      setGroup([...filterTracks(res.tracks.items)]);
     });
   }, []);
 
   function filterTracks(tracks) {
     return tracks.reduce((arr, crr) => {
       const id = crr.track.album.id;
-      if (!arr[id]) {
-        arr[id] = {
-          name: crr.track.album.name,
-          thumbnail: crr.track.album.images,
-          tracks: [{ name: crr.track.name, artists: crr.track.artists }],
-        };
+      const data = arr.get(id)
+      const track = { name: crr.track.name, artists: crr.track.artists }
+      const thumbnail = crr.track.album.images
+      if(!data) {
+        arr.set(id, {
+          id,
+          thumbnail,
+          tracks: [track]
+        })
       } else {
-        arr[id].tracks.push({
-          name: crr.track.name,
-          artists: crr.track.artists,
-        });
+        data.tracks.push(track)
       }
 
-      return arr;
-    }, {});
+      return arr
+    }, new Map());
   }
 
   return (
