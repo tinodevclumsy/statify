@@ -9,7 +9,7 @@ import LinkButton from "../components/common/Link";
 const Container = styled.div`
   max-width: 1280px;
   padding: 0 15px;
-  margin: 30px auto;
+  margin: 100px auto;
 `;
 
 const Background = styled.div`

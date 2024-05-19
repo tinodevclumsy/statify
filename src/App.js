@@ -6,14 +6,19 @@ import Login from "./page/Login";
 import Redirect from "./page/Redirect";
 import PlayListDetail from "./page/PlayListDetail";
 
+import TheHeader from "./components/TheHeader";
+
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/callback" element={<Redirect />} />
-      <Route path="/playlist/:id" element={<PlayListDetail />} />
-    </Routes>
+    <>
+      <TheHeader />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/callback" element={<Redirect />} />
+        <Route path="/playlist/:id" element={<PlayListDetail />} />
+      </Routes>
+    </>
   );
 }
 
