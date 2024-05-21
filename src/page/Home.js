@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getProfile, getPlaylists } from "../api/SpotifyAPI";
-import { refreshToken } from "../api/AuthAPI";
+import { getPlaylists } from "../api/SpotifyAPI";
 import ProfileCard from "../components/ProfileCard";
 import PlayList from "../components/PlayList";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 1280px;
@@ -13,51 +11,17 @@ const Container = styled.div`
 `;
 
 const Home = () => {
-  const [user, setUser] = useState();
   const [playlist, setPlayList] = useState({});
-  const navigate = useNavigate();
-
-  const handleToken = () => {
-    refreshToken().then((res) => {
-      if (res) {
-        getProfile().then((res) => {
-          setUser(res);
-        });
-        getPlaylists().then((res) => {
-          setPlayList(res);
-        });
-      }
-    });
-  };
 
   useEffect(() => {
-    if (!localStorage.getItem("access_token")) {
-      navigate("/login");
-    } else {
-      getProfile()
-        .then((res) => {
-          setUser(res);
-          getPlaylists().then((res) => {
-            setPlayList(res);
-          });
-        })
-        .catch((e) => {
-          if (e.response.status === 401) {
-            handleToken();
-          }
-        });
-    }
+    getPlaylists().then((res) => {
+      setPlayList(res);
+    });
   }, []);
 
   return (
     <Container>
-      {user && (
-        <ProfileCard
-          username={user.display_name}
-          profile_image={user.images[1].url}
-          uri={user.uri}
-        />
-      )}
+      <ProfileCard />
 
       <PlayList data={playlist} />
     </Container>

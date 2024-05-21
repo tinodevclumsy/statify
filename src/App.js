@@ -8,9 +8,49 @@ import PlayListDetail from "./page/PlayListDetail";
 
 import TheHeader from "./components/TheHeader";
 
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { getProfile } from "./api/SpotifyAPI";
+import { refreshToken } from "./api/AuthAPI";
+
+import ProfileContext from "./context/ProfileContext";
+
 function App() {
+  // const ProfileContext = createContext(null);
+  const navigate = useNavigate();
+
+  const [profile, setProfile] = useState();
+
+  const handleToken = () => {
+    refreshToken().then((res) => {
+      if (res) {
+        getProfile().then((res) => {
+          setProfile(res);
+        });
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (!localStorage.getItem("access_token")) {
+      navigate("/login");
+    } else {
+      getProfile()
+        .then((res) => {
+          console.log(res);
+          setProfile(res);
+        })
+        .catch((e) => {
+          if (e.response.status === 401) {
+            handleToken();
+          }
+        });
+    }
+  }, []);
+
   return (
-    <>
+    <ProfileContext.Provider value={profile}>
       <TheHeader />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -18,7 +58,7 @@ function App() {
         <Route path="/callback" element={<Redirect />} />
         <Route path="/playlist/:id" element={<PlayListDetail />} />
       </Routes>
-    </>
+    </ProfileContext.Provider>
   );
 }
 

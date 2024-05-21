@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import LinkButton from "./common/Link";
+
+import ProfileContext from "../context/ProfileContext";
 
 const Card = styled.div`
   background-color: ${(props) => props.theme.dark};
@@ -26,17 +28,23 @@ const UserName = styled.h2`
   margin: 10px 0;
 `;
 
-const ProfileCard = ({ profile_image, username, uri }) => {
+const ProfileCard = () => {
+  const profile = useContext(ProfileContext);
+
   return (
-    <Card>
-      <ProfileImage>
-        <img src={profile_image} alt="User Profile" />
-      </ProfileImage>
-      <UserName>{username}</UserName>
-      <LinkButton href={uri} target="_blank">
-        View on Spotify
-      </LinkButton>
-    </Card>
+    <>
+      {profile && (
+        <Card>
+          <ProfileImage>
+            <img src={profile.images[1].url} alt="User Profile" />
+          </ProfileImage>
+          <UserName>{profile.display_name}</UserName>
+          <LinkButton href={profile.uri} target="_blank">
+            View on Spotify
+          </LinkButton>
+        </Card>
+      )}
+    </>
   );
 };
 
