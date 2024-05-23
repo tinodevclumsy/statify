@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   position: fixed;
@@ -32,12 +33,20 @@ const SignOutButton = styled.button`
 `;
 
 const TheHeader = () => {
+  const navigate = useNavigate();
+  function onSignOut() {
+    navigate("/login");
+    localStorage.removeItem("access_token");
+  }
+
   return (
     <HeaderContainer>
-      <Title>Statify</Title>
+      <Link to="/">
+        <Title>Statify</Title>
+      </Link>
 
       <div>
-        <SignOutButton>Sign Out</SignOutButton>
+        <SignOutButton onClick={onSignOut}>Sign Out</SignOutButton>
       </div>
     </HeaderContainer>
   );
