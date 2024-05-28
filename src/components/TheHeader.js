@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
+import ProfileContext from "../context/ProfileContext";
 
 const HeaderContainer = styled.div`
   position: fixed;
@@ -32,8 +33,34 @@ const SignOutButton = styled.button`
   font-weight: 500;
 `;
 
+const Nav = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  color: #fff;
+  margin-right: 10px;
+`;
+
+const ProfileImage = styled.div`
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  overflow: hidden;
+`;
+
 const TheHeader = () => {
+  const profile = useContext(ProfileContext);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("mounted", profile);
+  }, [profile]);
+
   function onSignOut() {
     navigate("/login");
     localStorage.removeItem("access_token");
@@ -45,9 +72,16 @@ const TheHeader = () => {
         <Title>Statify</Title>
       </Link>
 
-      <div>
+      <Nav>
+        {profile && (
+          <Profile>
+            <ProfileImage>
+              <img src={profile.images[1].url} alt="User Profile on Header" />
+            </ProfileImage>
+          </Profile>
+        )}
         <SignOutButton onClick={onSignOut}>Sign Out</SignOutButton>
-      </div>
+      </Nav>
     </HeaderContainer>
   );
 };
