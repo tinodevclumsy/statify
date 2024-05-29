@@ -5,6 +5,7 @@ import PlayListCard from "../components/PlayListCard";
 import TrackList from "../components/TrackList";
 import styled from "styled-components";
 import LinkButton from "../components/common/Link";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 1280px;
@@ -38,7 +39,7 @@ const PlayListDetail = () => {
   const [detail, setDetail] = useState();
   const [group, setGroup] = useState();
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     getPlayListDetail({ id }).then((res) => {
@@ -99,7 +100,9 @@ const PlayListDetail = () => {
             owner={detail.owner.display_name}
           ></PlayListCard>
           <div style={{ textAlign: "center", padding: "20px" }}>
-            <LinkButton>Create a Board</LinkButton>
+            <LinkButton>
+              <Link to={"/board"}>Create a Board</Link>
+            </LinkButton>
           </div>
           <ListNav>
             <p style={{ color: "#fff" }}>

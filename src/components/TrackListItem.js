@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import AlbumContext from "../context/AlbumContext";
 
 const Thumbnail = styled.div`
   width: 85px;
@@ -38,17 +39,29 @@ const TrackCell = styled.td`
 `;
 
 const TrackListItem = ({ item, onTrackClick }) => {
+  const { albums, setAlbums } = useContext(AlbumContext);
+
   const { name, thumbnail, tracks } = item;
 
   const getArists = (artists) => {
     return artists.map((ele) => ele.name);
   };
 
+  const onAlbumCheck = (e) => {
+    if(e.target.checked) {
+      if(!albums.some(ele => ele.id === item.id)) {
+        setAlbums([...albums, item]);
+      }
+      return
+    }
+    setAlbums(albums.filter(ele => ele.id !== item.id))
+  };
+
   return (
     <>
       <ListRow onClick={() => onTrackClick(thumbnail[0].url)}>
         <ListCell style={{ textAlign: "center" }}>
-          <CheckBox type="checkbox" />
+          <CheckBox type="checkbox" onChange={onAlbumCheck} />
         </ListCell>
         <ThumbnailCell>
           <Thumbnail>

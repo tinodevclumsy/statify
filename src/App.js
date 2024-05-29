@@ -16,12 +16,13 @@ import { getProfile } from "./api/SpotifyAPI";
 import { refreshToken } from "./api/AuthAPI";
 
 import ProfileContext from "./context/ProfileContext";
+import AlbumContext from "./context/AlbumContext";
 
 function App() {
-  // const ProfileContext = createContext(null);
   const navigate = useNavigate();
 
   const [profile, setProfile] = useState();
+  const [albums, setAlbums] = useState([]);
 
   const handleToken = () => {
     refreshToken().then((res) => {
@@ -52,14 +53,16 @@ function App() {
 
   return (
     <ProfileContext.Provider value={profile}>
-      <TheHeader />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/callback" element={<Redirect />} />
-        <Route path="/playlist/:id" element={<PlayListDetail />} />
-        <Route path="/board" element={<Board />} />
-      </Routes>
+      <AlbumContext.Provider value={{ albums, setAlbums }}>
+        <TheHeader />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/callback" element={<Redirect />} />
+          <Route path="/playlist/:id" element={<PlayListDetail />} />
+          <Route path="/board" element={<Board />} />
+        </Routes>
+      </AlbumContext.Provider>
     </ProfileContext.Provider>
   );
 }
