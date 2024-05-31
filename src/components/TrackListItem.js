@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import AlbumContext from "../context/AlbumContext";
+import { MoreVertical } from "react-feather";
 
 const Thumbnail = styled.div`
   width: 85px;
@@ -8,7 +9,7 @@ const Thumbnail = styled.div`
 `;
 
 const Title = styled.h4`
-  color: #fff;
+  color: #F0F0F0;
 `;
 
 const ListRow = styled.tr`
@@ -27,15 +28,18 @@ const CheckBox = styled.input`
 
 const ListCell = styled.td`
   padding: 15px;
-  color: #fff;
+  color: #F0F0F0;
 `;
 
 const TrackCell = styled.td`
-  color: #fff;
+  color: #F0F0F0;
   padding: 15px;
   font-size: 13px;
   opacity: 0.8;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const TrackListItem = ({ item, onTrackClick }) => {
@@ -48,19 +52,19 @@ const TrackListItem = ({ item, onTrackClick }) => {
   };
 
   const onAlbumCheck = (e) => {
-    if(e.target.checked) {
-      if(!albums.some(ele => ele.id === item.id)) {
+    if (e.target.checked) {
+      if (!albums.some((ele) => ele.id === item.id)) {
         setAlbums([...albums, item]);
       }
-      return
+      return;
     }
-    setAlbums(albums.filter(ele => ele.id !== item.id))
+    setAlbums(albums.filter((ele) => ele.id !== item.id));
   };
 
   return (
     <>
       <ListRow onClick={() => onTrackClick(thumbnail[0].url)}>
-        <ListCell style={{ textAlign: "center" }}>
+        <ListCell style={{ textAlign: "center", width: "65px" }}>
           <CheckBox type="checkbox" onChange={onAlbumCheck} />
         </ListCell>
         <ThumbnailCell>
@@ -74,7 +78,9 @@ const TrackListItem = ({ item, onTrackClick }) => {
         <ListCell>
           <Title>{name}</Title>
         </ListCell>
-        <ListCell style={{ textAlign: "center" }}>Action</ListCell>
+        <ListCell style={{ textAlign: "center", width: "15px" }}>
+          <MoreVertical />
+        </ListCell>
       </ListRow>
       {tracks.map((track, key) => {
         return (

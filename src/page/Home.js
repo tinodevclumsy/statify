@@ -15,6 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     getPlaylists().then((res) => {
+      console.log(res)
       setPlayList(res);
     });
   }, []);

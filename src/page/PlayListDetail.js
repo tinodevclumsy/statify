@@ -6,6 +6,7 @@ import TrackList from "../components/TrackList";
 import styled from "styled-components";
 import LinkButton from "../components/common/Link";
 import { Link } from "react-router-dom";
+import InputSearch from "../components/common/InputSearch";
 
 const Container = styled.div`
   max-width: 1280px;
@@ -43,6 +44,7 @@ const PlayListDetail = () => {
 
   useEffect(() => {
     getPlayListDetail({ id }).then((res) => {
+      console.log(res);
       setDetail(res);
       setGroup([...groupAlbums(res.tracks.items)]);
     });
@@ -84,10 +86,12 @@ const PlayListDetail = () => {
         return false;
       });
 
-      return filtered.slice(page, page + NUM_PER_PAGE);
+      // return filtered.slice(page, page + NUM_PER_PAGE);
+      return filtered;
     }
 
-    return group.slice(page, page + NUM_PER_PAGE);
+    // return group.slice(page, page + NUM_PER_PAGE);
+    return group;
   }
 
   return (
@@ -98,7 +102,7 @@ const PlayListDetail = () => {
             name={detail.name}
             thumbnail={detail.images.length && detail.images[0].url}
             owner={detail.owner.display_name}
-          ></PlayListCard>
+          />
           <div style={{ textAlign: "center", padding: "20px" }}>
             <LinkButton>
               <Link to={"/board"}>Create a Board</Link>
@@ -108,7 +112,7 @@ const PlayListDetail = () => {
             <p style={{ color: "#fff" }}>
               Total Albums: {group.length} / Total Tracks: {detail.tracks.total}
             </p>
-            <input onChange={(e) => setSearch(e.target.value)} />
+            <InputSearch onSearch={setSearch} />
           </ListNav>
           <TrackList data={filterAlbums()} onTrackClick={() => {}} />
           <Background

@@ -5,7 +5,9 @@ import LinkButton from "./common/Link";
 import ProfileContext from "../context/ProfileContext";
 
 const Card = styled.div`
-  background-color: ${(props) => props.theme.dark};
+  /* background-color: ${(props) => props.theme.dark}; */
+  background-image: linear-gradient( ${(props) => props.theme.grey}, ${(props) => props.theme.dark});
+
   width: 100%;
   padding: 30px;
   border-radius: 13px;
@@ -14,12 +16,9 @@ const Card = styled.div`
 `;
 
 const ProfileImage = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  width: 150px;
-  height: 150px;
+  width: 125px;
+  height: 125px;
   border-radius: 50%;
   margin: auto;
 `;

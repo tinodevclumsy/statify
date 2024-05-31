@@ -10,12 +10,20 @@ const TableHeader = styled.th`
   text-align: left;
 `;
 
+const CheckBox = styled.input`
+  accent-color: ${(props) => props.theme.primary};
+  width: 18px;
+  height: 18px;
+`;
+
 const TrackList = ({ data, onTrackClick }) => {
   return (
     <table style={{ width: "100%" }}>
       <thead>
         <tr>
-          <TableHeader></TableHeader>
+          <TableHeader style={{ textAlign: "center" }}>
+            <CheckBox type="checkbox" />
+          </TableHeader>
           <TableHeader></TableHeader>
           <TableHeader>Name & Track - Artists</TableHeader>
           <TableHeader></TableHeader>

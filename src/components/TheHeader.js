@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import ProfileContext from "../context/ProfileContext";
+import LogoImage from "../assets/Logo.png";
 
 const HeaderContainer = styled.div`
   position: fixed;
@@ -13,13 +14,11 @@ const HeaderContainer = styled.div`
   width: 100%;
   z-index: 1;
   padding: 5px 15px;
-  background-color: ${(props) => props.theme.dark};
   height: 75px;
-`;
-
-const Title = styled.h2`
-  color: #fff;
-  text-transform: uppercase;
+  background-color: ${(props) =>
+    props.sticky ? props.theme.dark : "transparent"};
+  transition: 0.2s ease-in-out all;
+  -webkit-transition: 0.2s ease-in-out all;
 `;
 
 const SignOutButton = styled.button`
@@ -52,24 +51,44 @@ const ProfileImage = styled.div`
   overflow: hidden;
 `;
 
+const Logo = styled.div`
+  width: 100px;
+  display: flex;
+`;
+
 const TheHeader = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
   const profile = useContext(ProfileContext);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log("mounted", profile);
-  }, [profile]);
 
   function onSignOut() {
     navigate("/login");
     localStorage.removeItem("access_token");
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <HeaderContainer>
+    <HeaderContainer sticky={isScrolled}>
       <Link to="/">
-        <Title>Statify</Title>
+        <Logo>
+          <img src={LogoImage} alt="Logo" />
+        </Logo>
       </Link>
 
       <Nav>
