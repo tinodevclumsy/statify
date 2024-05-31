@@ -114,7 +114,7 @@ const PlayListDetail = () => {
             </p>
             <InputSearch onSearch={setSearch} />
           </ListNav>
-          <TrackList data={filterAlbums()} onTrackClick={() => {}} />
+          <TrackList data={filterAlbums()} />
           <Background
             style={{ backgroundImage: `url(${detail.images[0].url})` }}
           />

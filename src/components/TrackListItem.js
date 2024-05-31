@@ -9,7 +9,7 @@ const Thumbnail = styled.div`
 `;
 
 const Title = styled.h4`
-  color: #F0F0F0;
+  color: #f0f0f0;
 `;
 
 const ListRow = styled.tr`
@@ -28,11 +28,11 @@ const CheckBox = styled.input`
 
 const ListCell = styled.td`
   padding: 15px;
-  color: #F0F0F0;
+  color: #f0f0f0;
 `;
 
 const TrackCell = styled.td`
-  color: #F0F0F0;
+  color: #f0f0f0;
   padding: 15px;
   font-size: 13px;
   opacity: 0.8;
@@ -45,7 +45,7 @@ const TrackCell = styled.td`
 const TrackListItem = ({ item, onTrackClick }) => {
   const { albums, setAlbums } = useContext(AlbumContext);
 
-  const { name, thumbnail, tracks } = item;
+  const { id, name, thumbnail, tracks } = item;
 
   const getArists = (artists) => {
     return artists.map((ele) => ele.name);
@@ -61,11 +61,19 @@ const TrackListItem = ({ item, onTrackClick }) => {
     setAlbums(albums.filter((ele) => ele.id !== item.id));
   };
 
+  const checkSelected = (id) => {
+    return albums.some((ele) => ele.id === id);
+  };
+
   return (
     <>
-      <ListRow onClick={() => onTrackClick(thumbnail[0].url)}>
+      <ListRow>
         <ListCell style={{ textAlign: "center", width: "65px" }}>
-          <CheckBox type="checkbox" onChange={onAlbumCheck} />
+          <CheckBox
+            checked={checkSelected(id)}
+            type="checkbox"
+            onChange={onAlbumCheck}
+          />
         </ListCell>
         <ThumbnailCell>
           <Thumbnail>

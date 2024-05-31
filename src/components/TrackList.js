@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import TrackListItem from "./TrackListItem";
 import styled from "styled-components";
+import AlbumContext from "../context/AlbumContext";
 
 const TableHeader = styled.th`
   color: #fff;
@@ -16,13 +17,32 @@ const CheckBox = styled.input`
   height: 18px;
 `;
 
-const TrackList = ({ data, onTrackClick }) => {
+const TrackList = ({ data }) => {
+  const { albums, setAlbums } = useContext(AlbumContext);
+
+  const onSelectAll = (e) => {
+    if (e.target.checked) {
+      setAlbums(data.map((ele) => ele[1]));
+      return;
+    }
+
+    setAlbums([]);
+  };
+
+  const checkAll = () => {
+    return albums.length === data.length;
+  };
+
   return (
     <table style={{ width: "100%" }}>
       <thead>
         <tr>
           <TableHeader style={{ textAlign: "center" }}>
-            <CheckBox type="checkbox" />
+            <CheckBox
+              type="checkbox"
+              checked={checkAll()}
+              onChange={onSelectAll}
+            />
           </TableHeader>
           <TableHeader></TableHeader>
           <TableHeader>Name & Track - Artists</TableHeader>
@@ -36,7 +56,6 @@ const TrackList = ({ data, onTrackClick }) => {
               <TrackListItem
                 key={`album-${id}`}
                 item={value}
-                onTrackClick={onTrackClick}
               />
             );
           })}
