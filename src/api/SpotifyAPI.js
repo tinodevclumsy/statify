@@ -44,3 +44,24 @@ export const getPlayListDetail = ({ id }) => {
       });
   });
 };
+
+export const searchItems = (q) => {
+  return new Promise((resolve, reject) => {
+    api
+      .get(`/search`, {
+        params: {
+          q,
+          type: 'album,track',
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          resolve(res.data);
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

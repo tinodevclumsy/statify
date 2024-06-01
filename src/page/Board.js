@@ -1,36 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import AlbumContext from "../context/AlbumContext";
-
-const Panel = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: ${(props) => props.theme.grey};
-  width: 350px;
-  height: 100vh;
-  z-index: 1;
-  transform: ${(props) => (props.open ? "translateX(0)" : "translateX(-100%)")};
-  transition: 0.2s ease-in-out all;
-  -webkit-transition: 0.2s ease-in-out all;
-`;
+import { Settings, Search } from "react-feather";
+import IconContainer from "../components/common/Icon";
+import BoardSearchPanel from "../components/BoardSearchPanel";
 
 const Container = styled.div`
   width: 100%;
   margin: 75px auto 0;
-  display: flex;
   min-height: calc(100vh - 75px);
-  align-items: center;
+  max-width: 800px;
+  padding: 0 10px;
 `;
 
 const BoardContainer = styled.div`
   width: 100%;
-  padding: 20px;
 `;
 
 const Frame = styled.div`
   display: flex;
-  max-width: 800px;
   margin: auto;
   flex-wrap: wrap;
   gap: 10px;
@@ -48,15 +36,15 @@ const PrimaryCell = styled.div`
   grid-column: span 6 / 5;
 `;
 
-const Search = styled.input`
-  width: 100%;
-  padding: 10px;
+const Nav = styled.div`
+  display: flex;
+  margin-bottom: 10px;
 `;
 
 const Board = () => {
   const { albums, setAlbums } = useContext(AlbumContext);
   const [swapIndex, setSwapIndex] = useState(-1);
-  const [panel, setPanel] = useState(false);
+  const [toggleSearch, setToggleSearch] = useState(false);
 
   useEffect(() => {
     const selected = albums.length;
@@ -107,15 +95,26 @@ const Board = () => {
   };
 
   const onCellClick = () => {
-    setPanel(!panel);
+    setToggleSearch(!toggleSearch);
   };
 
   return (
     <>
-      <Panel open={panel}>
-        <Search onChange={(e) => {}} />
-      </Panel>
+      <BoardSearchPanel open={toggleSearch} />
       <Container>
+        <Nav>
+          <IconContainer
+            style={{ marginRight: "5px" }}
+            onClick={() => {
+              setToggleSearch(true);
+            }}
+          >
+            <Search />
+          </IconContainer>
+          <IconContainer>
+            <Settings />
+          </IconContainer>
+        </Nav>
         <BoardContainer>
           <Frame>
             {albums.map((item, key) => {
@@ -133,7 +132,6 @@ const Board = () => {
                   }
                   onClick={onCellClick}
                 >
-                  {/* <img src={item} /> */}
                 </PrimaryCell>
               );
             })}
