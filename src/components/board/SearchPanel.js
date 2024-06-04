@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { searchItems } from "../api/SpotifyAPI";
-import InputSearch from "../components/common/InputSearch";
+import { searchItems } from "../../api/SpotifyAPI";
+import InputSearch from "../common/InputSearch";
 
 const Panel = styled.div`
   position: fixed;
@@ -17,7 +17,7 @@ const Panel = styled.div`
   -webkit-transition: 0.2s ease-in-out all;
 `;
 
-const BoardSearchPanel = ({ open }) => {
+const SearchPanel = ({ open }) => {
   const onSearch = (str) => {
     searchItems(str);
   };
@@ -29,4 +29,4 @@ const BoardSearchPanel = ({ open }) => {
   );
 };
 
-export default BoardSearchPanel;
+export default SearchPanel;

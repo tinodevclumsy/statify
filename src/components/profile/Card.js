@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import LinkButton from "./common/Link";
+import LinkButton from "../common/Link";
 
-import ProfileContext from "../context/ProfileContext";
+import ProfileContext from "../../context/ProfileContext";
 
 const Card = styled.div`
   /* background-color: ${(props) => props.theme.dark}; */

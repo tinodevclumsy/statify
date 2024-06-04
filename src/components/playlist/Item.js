@@ -39,7 +39,6 @@ const Detail = styled.div`
 `;
 
 const ItemContainer = styled.div`
-  /* background-color: ${(props) => props.theme.dark}; */
   margin: 5px 0 0;
   overflow: hidden;
   color: #fff;

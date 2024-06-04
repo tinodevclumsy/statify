@@ -1,6 +1,6 @@
 import api from "./index";
 
-export const getProfile = (code) => {
+export const getProfile = () => {
   return new Promise((resolve, reject) => {
     api
       .get("/me")
@@ -15,7 +15,7 @@ export const getProfile = (code) => {
   });
 };
 
-export const getPlaylists = (code) => {
+export const getPlaylists = () => {
   return new Promise((resolve, reject) => {
     api
       .get("/me/playlists")
@@ -30,7 +30,7 @@ export const getPlaylists = (code) => {
   });
 };
 
-export const getPlayListDetail = ({ id }) => {
+export const getPlayListDetail = (id) => {
   return new Promise((resolve, reject) => {
     api
       .get(`/playlists/${id}`)
@@ -51,7 +51,7 @@ export const searchItems = (q) => {
       .get(`/search`, {
         params: {
           q,
-          type: 'album,track',
+          type: "album,track",
         },
       })
       .then((res) => {

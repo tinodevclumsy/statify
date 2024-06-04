@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import AlbumContext from "../context/AlbumContext";
+import AlbumContext from "../../context/AlbumContext";
 import { MoreVertical } from "react-feather";
 
 const Thumbnail = styled.div`

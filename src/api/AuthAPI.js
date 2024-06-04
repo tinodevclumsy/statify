@@ -25,6 +25,7 @@ export const generateToken = (code) => {
 };
 
 export const refreshToken = () => {
+  console.log('ssss')
   return new Promise((resolve, reject) => {
     api
       .post("/token", {
@@ -38,6 +39,7 @@ export const refreshToken = () => {
           localStorage.setItem("refresh_token", res.data.refresh_token);
           resolve(true);
         }
+        resolve(false);
       })
       .catch((error) => {
         console.error(error);

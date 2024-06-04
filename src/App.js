@@ -6,50 +6,18 @@ import Login from "./page/Login";
 import Redirect from "./page/Redirect";
 import PlayListDetail from "./page/PlayListDetail";
 import Board from "./page/Board";
-
 import TheHeader from "./components/TheHeader";
 
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-import { getProfile } from "./api/SpotifyAPI";
-import { refreshToken } from "./api/AuthAPI";
+import { useProfile } from "./hooks/useProfile";
 
 import ProfileContext from "./context/ProfileContext";
 import AlbumContext from "./context/AlbumContext";
 
 function App() {
-  const navigate = useNavigate();
-
-  const [profile, setProfile] = useState();
+  const profile = useProfile();
   const [albums, setAlbums] = useState([]);
-
-  const handleToken = () => {
-    refreshToken().then((res) => {
-      if (res) {
-        getProfile().then((res) => {
-          setProfile(res);
-        });
-      }
-    });
-  };
-
-  useEffect(() => {
-    if (!localStorage.getItem("access_token")) {
-      navigate("/login");
-    } else {
-      getProfile()
-        .then((res) => {
-          console.log(res);
-          setProfile(res);
-        })
-        .catch((e) => {
-          if (e.response.status === 401) {
-            handleToken();
-          }
-        });
-    }
-  }, []);
 
   return (
     <ProfileContext.Provider value={profile}>

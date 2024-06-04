@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import TrackListItem from "./TrackListItem";
+import TrackListItem from "./Item";
 import styled from "styled-components";
-import AlbumContext from "../context/AlbumContext";
+import AlbumContext from "../../context/AlbumContext";
 
 const TableHeader = styled.th`
   color: #fff;

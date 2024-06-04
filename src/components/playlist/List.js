@@ -1,5 +1,5 @@
 import React from "react";
-import PlayListItem from "./PlayListItem";
+import PlayListItem from "./Item";
 import styled from "styled-components";
 
 const ListContainer = styled.div`

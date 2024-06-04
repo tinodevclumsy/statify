@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { getPlaylists } from "../api/SpotifyAPI";
-import ProfileCard from "../components/ProfileCard";
-import PlayList from "../components/PlayList";
+import React, { useEffect } from "react";
+import ProfileCard from "../components/profile/Card";
+import PlayList from "../components/playlist/List";
 import styled from "styled-components";
+import usePlaylist from "../hooks/usePlaylist";
 
 const Container = styled.div`
   max-width: 1280px;
@@ -11,13 +11,10 @@ const Container = styled.div`
 `;
 
 const Home = () => {
-  const [playlist, setPlayList] = useState({});
+  const { fetchPlaylist, playlist } = usePlaylist();
 
   useEffect(() => {
-    getPlaylists().then((res) => {
-      console.log(res)
-      setPlayList(res);
-    });
+    fetchPlaylist();
   }, []);
 
   return (

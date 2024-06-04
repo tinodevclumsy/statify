@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPlayListDetail } from "../api/SpotifyAPI";
-import PlayListCard from "../components/PlayListCard";
-import TrackList from "../components/TrackList";
-import styled from "styled-components";
-import LinkButton from "../components/common/Link";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+import PlayListCard from "../components/playlist/Card";
+import TrackList from "../components/track/List";
+import LinkButton from "../components/common/Link";
 import InputSearch from "../components/common/InputSearch";
+
+import usePlaylist from "../hooks/usePlaylist";
 
 const Container = styled.div`
   max-width: 1280px;
@@ -35,73 +37,22 @@ const ListNav = styled.div`
 
 const PlayListDetail = () => {
   const { id } = useParams();
-  const NUM_PER_PAGE = 10;
-
-  const [detail, setDetail] = useState();
-  const [group, setGroup] = useState();
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(0);
+  const [term, setTerm] = useState("");
+  const { playlistDetail, tracks, fetchPlaylistDetail, filterTracks } =
+    usePlaylist();
 
   useEffect(() => {
-    getPlayListDetail({ id }).then((res) => {
-      console.log(res);
-      setDetail(res);
-      setGroup([...groupAlbums(res.tracks.items)]);
-    });
+    fetchPlaylistDetail(id);
   }, [id]);
-
-  function groupAlbums(tracks) {
-    return tracks.reduce((arr, crr) => {
-      const id = crr.track.album.id;
-      const data = arr.get(id);
-      const track = { name: crr.track.name, artists: crr.track.artists };
-      const thumbnail = crr.track.album.images;
-
-      if (!data) {
-        arr.set(id, {
-          id,
-          name: crr.track.album.name,
-          thumbnail,
-          tracks: [track],
-        });
-      } else {
-        data.tracks.push(track);
-      }
-
-      return arr;
-    }, new Map());
-  }
-
-  function filterAlbums() {
-    if (search) {
-      const filtered = group.filter((ele) => {
-        if (
-          ele[1].name.toLowerCase().includes(search.toLowerCase()) ||
-          ele[1].tracks.filter((ele) =>
-            ele.name.toLowerCase().includes(search.toLowerCase())
-          ).length
-        ) {
-          return true;
-        }
-        return false;
-      });
-
-      // return filtered.slice(page, page + NUM_PER_PAGE);
-      return filtered;
-    }
-
-    // return group.slice(page, page + NUM_PER_PAGE);
-    return group;
-  }
 
   return (
     <Container>
-      {detail && (
+      {playlistDetail && (
         <>
           <PlayListCard
-            name={detail.name}
-            thumbnail={detail.images.length && detail.images[0].url}
-            owner={detail.owner.display_name}
+            name={playlistDetail.name}
+            thumbnail={playlistDetail.thumbnail}
+            owner={playlistDetail.owner}
           />
           <div style={{ textAlign: "center", padding: "20px" }}>
             <LinkButton>
@@ -110,13 +61,14 @@ const PlayListDetail = () => {
           </div>
           <ListNav>
             <p style={{ color: "#fff" }}>
-              Total Albums: {group.length} / Total Tracks: {detail.tracks.total}
+              Total Albums: {tracks.length} / Total Tracks:{" "}
+              {playlistDetail.total}
             </p>
-            <InputSearch onSearch={setSearch} />
+            <InputSearch onSearch={setTerm} />
           </ListNav>
-          <TrackList data={filterAlbums()} />
+          <TrackList data={filterTracks(term)} />
           <Background
-            style={{ backgroundImage: `url(${detail.images[0].url})` }}
+            style={{ backgroundImage: `url(${playlistDetail.thumbnail})` }}
           />
         </>
       )}

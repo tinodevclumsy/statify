@@ -3,7 +3,7 @@ import styled from "styled-components";
 import AlbumContext from "../context/AlbumContext";
 import { Settings, Search } from "react-feather";
 import IconContainer from "../components/common/Icon";
-import BoardSearchPanel from "../components/BoardSearchPanel";
+import SearchPanel from "../components/board/SearchPanel";
 
 const Container = styled.div`
   width: 100%;
@@ -100,7 +100,7 @@ const Board = () => {
 
   return (
     <>
-      <BoardSearchPanel open={toggleSearch} />
+      <SearchPanel open={toggleSearch} />
       <Container>
         <Nav>
           <IconContainer
@@ -131,8 +131,7 @@ const Board = () => {
                     item && { background: `url(${item.thumbnail[0].url})` }
                   }
                   onClick={onCellClick}
-                >
-                </PrimaryCell>
+                ></PrimaryCell>
               );
             })}
           </Frame>
