@@ -10,12 +10,6 @@ import InputSearch from "../components/common/InputSearch";
 
 import usePlaylist from "../hooks/usePlaylist";
 
-const Container = styled.div`
-  max-width: 1280px;
-  padding: 0 15px;
-  margin: 100px auto;
-`;
-
 const Background = styled.div`
   position: fixed;
   top: 0;
@@ -46,7 +40,7 @@ const PlayListDetail = () => {
   }, [id]);
 
   return (
-    <Container>
+    <>
       {playlistDetail && (
         <>
           <PlayListCard
@@ -72,7 +66,7 @@ const PlayListDetail = () => {
           />
         </>
       )}
-    </Container>
+    </>
   );
 };
 

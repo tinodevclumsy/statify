@@ -1,12 +1,13 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
+import MainLayout from "./layouts/MainLayout";
+
 import Home from "./page/Home";
 import Login from "./page/Login";
 import Redirect from "./page/Redirect";
 import PlayListDetail from "./page/PlayListDetail";
 import Board from "./page/Board";
-import TheHeader from "./components/TheHeader";
 
 import { useState } from "react";
 
@@ -22,14 +23,15 @@ function App() {
   return (
     <ProfileContext.Provider value={profile}>
       <AlbumContext.Provider value={{ albums, setAlbums }}>
-        <TheHeader />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/callback" element={<Redirect />} />
-          <Route path="/playlist/:id" element={<PlayListDetail />} />
-          <Route path="/board" element={<Board />} />
-        </Routes>
+        <MainLayout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/callback" element={<Redirect />} />
+            <Route path="/playlist/:id" element={<PlayListDetail />} />
+            <Route path="/board" element={<Board />} />
+          </Routes>
+        </MainLayout>
       </AlbumContext.Provider>
     </ProfileContext.Provider>
   );
