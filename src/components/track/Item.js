@@ -1,46 +1,15 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
 import AlbumContext from "../../context/AlbumContext";
 import { MoreVertical } from "react-feather";
-
-const Thumbnail = styled.div`
-  width: 85px;
-  height: 85px;
-`;
-
-const Title = styled.h4`
-  color: #f0f0f0;
-`;
-
-const ListRow = styled.tr`
-  background-color: rgba(0, 0, 0, 0.4);
-`;
-
-const ThumbnailCell = styled.td`
-  width: 85px;
-`;
-
-const CheckBox = styled.input`
-  accent-color: ${(props) => props.theme.primary};
-  width: 18px;
-  height: 18px;
-`;
-
-const ListCell = styled.td`
-  padding: 15px;
-  color: #f0f0f0;
-`;
-
-const TrackCell = styled.td`
-  color: #f0f0f0;
-  padding: 15px;
-  font-size: 13px;
-  opacity: 0.8;
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
+import {
+  Thumbnail,
+  Title,
+  ListRow,
+  ThumbnailCell,
+  ListCell,
+  TrackCell,
+} from "./Item.styled";
+import CheckBox from "../common/Checkbox";
 
 const TrackListItem = ({ item, onTrackClick }) => {
   const { albums, setAlbums } = useContext(AlbumContext);
@@ -69,11 +38,7 @@ const TrackListItem = ({ item, onTrackClick }) => {
     <>
       <ListRow>
         <ListCell style={{ textAlign: "center", width: "65px" }}>
-          <CheckBox
-            checked={checkSelected(id)}
-            type="checkbox"
-            onChange={onAlbumCheck}
-          />
+          <CheckBox checked={checkSelected(id)} onChange={onAlbumCheck} />
         </ListCell>
         <ThumbnailCell>
           <Thumbnail>

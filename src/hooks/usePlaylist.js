@@ -44,13 +44,12 @@ const usePlaylist = () => {
         const cardData = {
           name: res.name,
           thumbnail: res.images.length && res.images[0].url,
-          owner: res.owner.display,
+          owner: res.owner.display_name,
           total: res.tracks.total,
         };
         setPlaylistDetail(cardData);
 
         const groupedTracks = groupByAlbum(res.tracks.items);
-
         setTracks([...groupedTracks]);
       })
       .catch((e) => {
