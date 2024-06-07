@@ -1,31 +1,59 @@
-import React from "react";
-import styled from "styled-components";
-import { searchItems } from "../../api/SpotifyAPI";
+// TODO: PAGINATION
+
+import { useContext } from "react";
 import InputSearch from "../common/InputSearch";
+import { Panel, PanelContainer, ResultContainer } from "./SearchPanel.styled";
+import useAlbum from "../../hooks/useAlbum";
+import SearchItem from "./SearchItem";
 
-const Panel = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: ${(props) => props.theme.secondary};
-  width: 350px;
-  height: 100vh;
-  padding: 15px;
-  z-index: 1;
-  transform: ${(props) => (props.open ? "translateX(0)" : "translateX(-100%)")};
-  transition: 0.2s ease-in-out all;
-  -webkit-transition: 0.2s ease-in-out all;
-`;
+import AlbumContext from "../../context/AlbumContext";
 
-const SearchPanel = ({ open }) => {
-  const onSearch = (str) => {
-    searchItems(str);
+const SearchPanel = ({ index, open, onPanelClick }) => {
+  const { searchAlbumAndTrack, searched, setSearched } = useAlbum();
+  const { setAlbums } = useContext(AlbumContext);
+
+  const closePanel = (e) => {
+    e.stopPropagation();
+    if (e.target === e.currentTarget) {
+      onPanelClick();
+    }
+  };
+
+  const onItemClick = (item, index) => {
+    const album = item.type === "album" ? item : item.album;
+    const data = {
+      id: album.id,
+      name: album.name,
+      thumbnail: album.images,
+    };
+
+    setAlbums((prev) => {
+      const cloned = [...prev];
+      cloned[index] = data;
+      return cloned;
+    });
+
+    onPanelClick();
+    setSearched([])
   };
 
   return (
-    <Panel open={open}>
-      <InputSearch onSearch={onSearch} />
-    </Panel>
+    <PanelContainer open={open} onClick={closePanel}>
+      <Panel open={open}>
+        <InputSearch onSearch={searchAlbumAndTrack} />
+        <ResultContainer>
+          {searched.map((item, key) => {
+            return (
+              <SearchItem
+                item={item}
+                key={`searched-${key}`}
+                onClick={() => onItemClick(item, index)}
+              />
+            );
+          })}
+        </ResultContainer>
+      </Panel>
+    </PanelContainer>
   );
 };
 

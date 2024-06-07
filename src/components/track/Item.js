@@ -10,15 +10,12 @@ import {
   TrackCell,
 } from "./Item.styled";
 import CheckBox from "../common/Checkbox";
+import useAlbum from "../../hooks/useAlbum";
 
 const TrackListItem = ({ item, onTrackClick }) => {
   const { albums, setAlbums } = useContext(AlbumContext);
-
+  const { getArtists } = useAlbum();
   const { id, name, thumbnail, tracks } = item;
-
-  const getArists = (artists) => {
-    return artists.map((ele) => ele.name);
-  };
 
   const onAlbumCheck = (e) => {
     if (e.target.checked) {
@@ -61,7 +58,7 @@ const TrackListItem = ({ item, onTrackClick }) => {
             <TrackCell></TrackCell>
             <TrackCell></TrackCell>
             <TrackCell>
-              #{++key}. {track.name} - {getArists(track.artists)}
+              #{++key}. {track.name} - {getArtists(track.artists)}
             </TrackCell>
             <TrackCell></TrackCell>
           </ListRow>

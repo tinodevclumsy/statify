@@ -4,12 +4,20 @@ export const Title = styled.h3`
   font-size: 14px;
   opacity: 0.7;
   font-weight: 500;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
 export const Owner = styled.h4`
   font-size: 12px;
   opacity: 0.5;
   font-weight: 500;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
 export const Thumbnail = styled.div`
