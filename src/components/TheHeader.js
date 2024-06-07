@@ -62,10 +62,11 @@ const TheHeader = () => {
 
   const navigate = useNavigate();
 
-  function onSignOut() {
-    navigate("/login");
+  const onSignOut = () => {
     localStorage.removeItem("access_token");
-  }
+    localStorage.removeItem("refresh_token");
+    navigate("/login");
+  };
 
   useEffect(() => {
     const handleScroll = () => {

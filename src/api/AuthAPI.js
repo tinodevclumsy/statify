@@ -23,27 +23,3 @@ export const generateToken = (code) => {
       });
   });
 };
-
-export const refreshToken = () => {
-  console.log('ssss')
-  return new Promise((resolve, reject) => {
-    api
-      .post("/token", {
-        grant_type: "refresh_token",
-        client_id: process.env.REACT_APP_CLIENT_ID,
-        refresh_token: localStorage.getItem("refresh_token"),
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          localStorage.setItem("access_token", res.data.access_token);
-          localStorage.setItem("refresh_token", res.data.refresh_token);
-          resolve(true);
-        }
-        resolve(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        reject(error);
-      });
-  });
-};
