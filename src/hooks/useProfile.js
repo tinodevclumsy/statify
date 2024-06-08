@@ -6,9 +6,9 @@ export const useProfile = () => {
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const fetchProfile = () => {
     if (!localStorage.getItem("access_token")) {
-      navigate("login");
+      navigate("/login");
     } else {
       getProfile()
         .then((res) => {
@@ -18,7 +18,13 @@ export const useProfile = () => {
           console.error(e);
         });
     }
+  };
+
+  useEffect(() => {
+    fetchProfile();
   }, []);
 
-  return profile;
+  return {
+    profile,
+  };
 };

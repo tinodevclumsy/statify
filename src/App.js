@@ -17,21 +17,21 @@ import ProfileContext from "./context/ProfileContext";
 import AlbumContext from "./context/AlbumContext";
 
 function App() {
-  const profile = useProfile();
+  const { profile } = useProfile();
   const [albums, setAlbums] = useState([]);
 
   return (
     <ProfileContext.Provider value={profile}>
       <AlbumContext.Provider value={{ albums, setAlbums }}>
-        <MainLayout>
-          <Routes>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/callback" element={<Redirect />} />
+          <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/callback" element={<Redirect />} />
             <Route path="/playlist/:id" element={<PlayListDetail />} />
             <Route path="/board" element={<Board />} />
-          </Routes>
-        </MainLayout>
+          </Route>
+        </Routes>
       </AlbumContext.Provider>
     </ProfileContext.Provider>
   );

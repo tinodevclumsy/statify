@@ -1,5 +1,6 @@
 import TheHeader from "../components/TheHeader";
 import styled from "styled-components";
+import { Outlet } from 'react-router-dom';
 
 const Container = styled.div`
   max-width: 1280px;
@@ -7,11 +8,13 @@ const Container = styled.div`
   margin: 100px auto;
 `;
 
-const MainLayout = ({ children }) => {
+const MainLayout = () => {
   return (
     <>
       <TheHeader />
-      <Container>{children}</Container>
+      <Container>
+        <Outlet />
+      </Container>
     </>
   );
 };
