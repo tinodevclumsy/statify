@@ -10,7 +10,7 @@ const Redirect = () => {
     const token = localStorage.getItem("access_token");
     if (!token) {
       generateToken(code).then((res) => {
-        if (res) navigate("/");
+        if (res) window.location.reload();
       });
     } else {
       navigate("/");

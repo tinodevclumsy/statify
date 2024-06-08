@@ -11,7 +11,7 @@ import Board from "./page/Board";
 
 import { useState } from "react";
 
-import { useProfile } from "./hooks/useProfile";
+import useProfile  from "./hooks/useProfile";
 
 import ProfileContext from "./context/ProfileContext";
 import AlbumContext from "./context/AlbumContext";

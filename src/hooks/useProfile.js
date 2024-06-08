@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { getProfile } from "../api/SpotifyAPI";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-export const useProfile = () => {
+const useProfile = () => {
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const fetchProfile = () => {
     if (!localStorage.getItem("access_token")) {
       navigate("/login");
-    } else {
+    } else if (location !== "/login" && location !== "/callback") {
       getProfile()
         .then((res) => {
           setProfile(res);
@@ -28,3 +29,5 @@ export const useProfile = () => {
     profile,
   };
 };
+
+export default useProfile;
