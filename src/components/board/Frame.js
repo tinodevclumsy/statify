@@ -1,8 +1,8 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState, forwardRef } from "react";
 import { BoardFrame, BoardCell } from "./Frame.styled";
 import AlbumContext from "../../context/AlbumContext";
 
-const Frame = ({ onFrameEvent, selected }) => {
+const Frame = forwardRef(({ onFrameEvent, selected }, ref) => {
   const { albums, setAlbums } = useContext(AlbumContext);
   const [swapIndex, setSwapIndex] = useState(-1);
 
@@ -57,7 +57,7 @@ const Frame = ({ onFrameEvent, selected }) => {
   };
 
   return (
-    <BoardFrame>
+    <BoardFrame ref={ref}>
       {albums.map((item, key) => {
         return (
           <BoardCell
@@ -76,6 +76,6 @@ const Frame = ({ onFrameEvent, selected }) => {
       })}
     </BoardFrame>
   );
-};
+});
 
 export default Frame;
