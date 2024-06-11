@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from "./auth";
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -20,7 +21,7 @@ const refreshToken = async () => {
     isTokenRefreshing = true;
 
     try {
-      const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/token`, {
+      const res = await api.post('/token', {
         grant_type: "refresh_token",
         client_id: process.env.REACT_APP_CLIENT_ID,
         refresh_token: localStorage.getItem("refresh_token"),
