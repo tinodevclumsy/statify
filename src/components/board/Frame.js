@@ -62,8 +62,8 @@ const Frame = forwardRef(({ onFrameEvent, selected }, ref) => {
         return (
           <BoardCell
             selected={key === selected && "selected"}
-            col={getColumns(key)}
-            spacing={(getColumns(key) - 1) * 10}
+            $col={getColumns(key)}
+            $spacing={(getColumns(key) - 1) * 10}
             key={item ? item.name : `blank-${key}`}
             draggable={true}
             onDragStart={() => handleDragStart(key)}

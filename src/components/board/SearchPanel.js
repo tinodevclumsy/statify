@@ -39,7 +39,7 @@ const SearchPanel = ({ index, open, onPanelClick }) => {
 
   return (
     <PanelContainer open={open} onClick={closePanel}>
-      <Panel open={open}>
+      <Panel $open={open}>
         <InputSearch onSearch={searchAlbumAndTrack} />
         <ResultContainer>
           {searched.map((item, key) => {

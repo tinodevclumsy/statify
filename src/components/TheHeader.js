@@ -40,7 +40,7 @@ const TheHeader = () => {
   }, []);
 
   return (
-    <HeaderContainer sticky={isScrolled ? "sticky" : "fixed"}>
+    <HeaderContainer $sticky={isScrolled.toString()}>
       <Link to="/">
         <Logo>
           <img src={LogoImage} alt="Logo" />

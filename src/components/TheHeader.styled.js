@@ -12,7 +12,7 @@ export const HeaderContainer = styled.div`
   padding: 5px 15px;
   height: 75px;
   background-color: ${(props) =>
-    props.sticky === "sticky" ? props.theme.dark : "transparent"};
+    props.$sticky === 'true' ? props.theme.dark : "transparent"};
   transition: 0.2s ease-in-out all;
   -webkit-transition: 0.2s ease-in-out all;
 `;

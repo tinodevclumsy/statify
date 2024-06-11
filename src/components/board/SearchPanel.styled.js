@@ -7,8 +7,8 @@ export const PanelContainer = styled.div`
   width: 100%;
   height: 100vh;
   background-color: ${(props) =>
-    props.open ? "rgba(0,0,0,.6)" : "transparent"};
-  z-index: ${(props) => (props.open ? 1 : -1)};
+    props.$open ? "rgba(0,0,0,.6)" : "transparent"};
+  z-index: ${(props) => (props.$open ? 1 : -1)};
 `;
 
 export const Panel = styled.div`
