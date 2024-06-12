@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import PlayListCard from "../components/playlist/Card";
 import TrackList from "../components/track/List";
-import LinkButton from "../components/common/Link";
+import { LinkButton } from "../components/common/Button";
 import InputSearch from "../components/common/InputSearch";
 
 import usePlaylist from "../hooks/usePlaylist";
@@ -25,7 +25,7 @@ const Background = styled.div`
 
 const ListNav = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 15px 0;
 `;
 
@@ -47,6 +47,7 @@ const PlayListDetail = () => {
             name={playlistDetail.name}
             thumbnail={playlistDetail.thumbnail}
             owner={playlistDetail.owner}
+            total={{ album: tracks.length, track: playlistDetail.total }}
           />
           <div style={{ textAlign: "center", padding: "20px" }}>
             <LinkButton>
@@ -54,10 +55,6 @@ const PlayListDetail = () => {
             </LinkButton>
           </div>
           <ListNav>
-            <p style={{ color: "#fff" }}>
-              Total Albums: {tracks.length} / Total Tracks:{" "}
-              {playlistDetail.total}
-            </p>
             <InputSearch onSearch={setTerm} />
           </ListNav>
           <TrackList data={filterTracks(term)} />

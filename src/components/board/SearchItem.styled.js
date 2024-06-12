@@ -25,7 +25,7 @@ export const Item = styled.div`
   cursor: pointer;
 
   &:hover ${ItemOverlay} {
-    opacity: .5;
+    opacity: 0.5;
   }
 `;
 
@@ -49,7 +49,7 @@ export const Title = styled.p`
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  color: #f0f0f0;
+  color: ${(props) => props.theme.white};
   opacity: 0.8;
   font-weight: 500;
   font-size: 14px;

@@ -5,18 +5,24 @@ import {
   PlayListName,
   OwnerName,
   Detail,
+  Type,
 } from "./Card.styled";
 
-const PlayListCard = ({ isPublic, thumbnail, name, owner }) => {
+const PlayListCard = ({ isPublic, thumbnail, name, owner, total }) => {
   return (
     <Card>
       <ProfileImage>
         <img src={thumbnail} alt="User Profile" />
       </ProfileImage>
       <Detail>
-        <h5>{isPublic ? "Private" : "Public"} Playlist</h5>
+        <Type>{isPublic ? "Private" : "Public"} Playlist</Type>
         <PlayListName>{name}</PlayListName>
-        <OwnerName>By {owner}</OwnerName>
+        <OwnerName>
+          Total Albums: {total.album} / Total Tracks: {total.track}
+        </OwnerName>
+        <OwnerName>
+          By {owner}
+        </OwnerName>
       </Detail>
     </Card>
   );

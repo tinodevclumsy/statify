@@ -38,7 +38,7 @@ const SearchPanel = ({ index, open, onPanelClick }) => {
   };
 
   return (
-    <PanelContainer open={open} onClick={closePanel}>
+    <PanelContainer $open={open} onClick={closePanel}>
       <Panel $open={open}>
         <InputSearch onSearch={searchAlbumAndTrack} />
         <ResultContainer>

@@ -47,7 +47,7 @@ export const Detail = styled.div`
 export const ItemContainer = styled.div`
   margin: 5px 0 0;
   overflow: hidden;
-  color: #fff;
+  color: ${(props) => props.theme.white};
   &:hover ${ThumbnailOverlay} {
     opacity: 0.5;
   }

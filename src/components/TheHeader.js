@@ -4,12 +4,11 @@ import ProfileContext from "../context/ProfileContext";
 import LogoImage from "../assets/Logo.png";
 import {
   HeaderContainer,
-  SignOutButton,
   Nav,
-  Profile,
   ProfileImage,
   Logo,
 } from "./TheHeader.styled";
+import { SignOutButton } from "./common/Button";
 
 const TheHeader = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -49,11 +48,9 @@ const TheHeader = () => {
 
       <Nav>
         {profile && (
-          <Profile>
-            <ProfileImage>
-              <img src={profile.images[1].url} alt="User Profile on Header" />
-            </ProfileImage>
-          </Profile>
+          <ProfileImage>
+            <img src={profile.images[1].url} alt="User Profile on Header" />
+          </ProfileImage>
         )}
         <SignOutButton onClick={onSignOut}>Sign Out</SignOutButton>
       </Nav>

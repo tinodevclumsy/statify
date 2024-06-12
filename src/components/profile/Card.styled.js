@@ -5,11 +5,10 @@ export const Card = styled.div`
     ${(props) => props.theme.grey},
     ${(props) => props.theme.dark}
   );
-  width: 100%;
   padding: 30px;
-  border-radius: 13px;
+  border-radius: ${(props) => props.theme.cardRadius};
   text-align: center;
-  color: #fff;
+  color: ${(props) => props.theme.white};
 `;
 
 export const ProfileImage = styled.div`
@@ -21,5 +20,6 @@ export const ProfileImage = styled.div`
 `;
 
 export const UserName = styled.h2`
+  color: ${(props) => props.theme.white};
   margin: 10px 0;
 `;

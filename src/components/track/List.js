@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import TrackListItem from "./Item";
 import AlbumContext from "../../context/AlbumContext";
-import { TableHeader } from "./List.styled";
+import { TableHeader, TableRow } from "../common/Table";
 import CheckBox from "../common/Checkbox";
 
 const TrackList = ({ data }) => {
@@ -21,20 +21,17 @@ const TrackList = ({ data }) => {
   };
 
   return (
-    <>
+    <div>
       <table style={{ width: "100%" }}>
         <thead>
-          <tr>
+          <TableRow>
             <TableHeader style={{ textAlign: "center" }}>
-              <CheckBox
-                checked={checkAll()}
-                onChange={onSelectAll}
-              />
+              <CheckBox checked={checkAll()} onChange={onSelectAll} />
             </TableHeader>
             <TableHeader></TableHeader>
             <TableHeader>Name & Track - Artists</TableHeader>
             <TableHeader></TableHeader>
-          </tr>
+          </TableRow>
         </thead>
         <tbody>
           {data &&
@@ -43,7 +40,7 @@ const TrackList = ({ data }) => {
             })}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 

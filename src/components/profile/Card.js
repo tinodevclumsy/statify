@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import LinkButton from "../common/Link";
+import { LinkButton } from "../common/Button";
 import { Card, ProfileImage, UserName } from "./Card.styled";
 import ProfileContext from "../../context/ProfileContext";
 
@@ -14,9 +14,9 @@ const ProfileCard = () => {
             <img src={profile.images[1].url} alt="User Profile" />
           </ProfileImage>
           <UserName>{profile.display_name}</UserName>
-          <LinkButton href={profile.uri} target="_blank">
-            View on Spotify
-          </LinkButton>
+          <a href={profile.uri} target="_blank" rel="noreferrer">
+            <LinkButton>View on Spotify</LinkButton>
+          </a>
         </Card>
       )}
     </>

@@ -1,18 +1,17 @@
 import React, { useContext } from "react";
 import AlbumContext from "../../context/AlbumContext";
 import { MoreVertical } from "react-feather";
+import { TableRow, TableCol, TrackCol } from "../common/Table";
 import {
   Thumbnail,
   Title,
-  ListRow,
   ThumbnailCell,
-  ListCell,
-  TrackCell,
+  TrackName,
 } from "./Item.styled";
 import CheckBox from "../common/Checkbox";
 import useAlbum from "../../hooks/useAlbum";
 
-const TrackListItem = ({ item, onTrackClick }) => {
+const TrackListItem = ({ item }) => {
   const { albums, setAlbums } = useContext(AlbumContext);
   const { getArtists } = useAlbum();
   const { id, name, thumbnail, tracks } = item;
@@ -33,10 +32,10 @@ const TrackListItem = ({ item, onTrackClick }) => {
 
   return (
     <>
-      <ListRow>
-        <ListCell style={{ textAlign: "center", width: "65px" }}>
+      <TableRow>
+        <TableCol style={{ textAlign: "center", width: "65px" }}>
           <CheckBox checked={checkSelected(id)} onChange={onAlbumCheck} />
-        </ListCell>
+        </TableCol>
         <ThumbnailCell>
           <Thumbnail>
             <img
@@ -45,23 +44,25 @@ const TrackListItem = ({ item, onTrackClick }) => {
             />
           </Thumbnail>
         </ThumbnailCell>
-        <ListCell>
+        <TableCol>
           <Title>{name}</Title>
-        </ListCell>
-        <ListCell style={{ textAlign: "center", width: "15px" }}>
-          <MoreVertical />
-        </ListCell>
-      </ListRow>
+        </TableCol>
+        <TableCol style={{ textAlign: "center", width: "15px" }}>
+          {/* <MoreVertical /> */}
+        </TableCol>
+      </TableRow>
       {tracks.map((track, key) => {
         return (
-          <ListRow key={`track-${name}-${key}`}>
-            <TrackCell></TrackCell>
-            <TrackCell></TrackCell>
-            <TrackCell>
-              #{++key}. {track.name} - {getArtists(track.artists)}
-            </TrackCell>
-            <TrackCell></TrackCell>
-          </ListRow>
+          <TableRow key={`track-${name}-${key}`}>
+            <TrackCol></TrackCol>
+            <TrackCol></TrackCol>
+            <TrackCol>
+              <TrackName>
+                #{++key}. {track.name} - {getArtists(track.artists)}
+              </TrackName>
+            </TrackCol>
+            <TrackCol></TrackCol>
+          </TableRow>
         );
       })}
     </>

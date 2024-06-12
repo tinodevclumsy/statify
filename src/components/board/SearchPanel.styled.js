@@ -17,7 +17,7 @@ export const Panel = styled.div`
   max-width: 450px;
   height: 100%;
   padding: 15px;
-  transform: ${(props) => (props.open ? "translateX(0)" : "translateX(-100%)")};
+  transform: ${(props) => (props.$open ? "translateX(0)" : "translateX(-100%)")};
   transition: 0.2s ease-in-out all;
   -webkit-transition: 0.2s ease-in-out all;
 `;
