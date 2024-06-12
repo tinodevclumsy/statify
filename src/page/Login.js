@@ -8,8 +8,7 @@ const Login = () => {
   const codeVerifier = generateRandomString(64);
   window.localStorage.setItem("code_verifier", codeVerifier);
   const clientId = process.env.REACT_APP_CLIENT_ID;
-  const redirectUri = "http://localhost:3000/callback";
-
+  const redirectUri = `${process.env.REACT_APP_SITE_URL}/callback`;
   const scope = "user-read-private user-read-email playlist-read-private";
   const authUrl = new URL("https://accounts.spotify.com/authorize");
 
@@ -26,8 +25,11 @@ const Login = () => {
         redirect_uri: redirectUri,
       };
 
+      console.log(params);
+
       authUrl.search = new URLSearchParams(params).toString();
-      window.location.href = authUrl.toString();
+      console.log(authUrl.toString());
+      // window.location.href = authUrl.toString();
     } catch (error) {
       console.error("Error fetching data:", error);
     }
