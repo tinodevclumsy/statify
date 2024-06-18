@@ -40,11 +40,16 @@ const Board = () => {
     setSeletectIndex(index);
   };
 
+  const onCloasePanel = () => {
+    setToggleSearch(false);
+    setSeletectIndex(-1);
+  };
+
   return (
     <>
       <SearchPanel
         index={selectedIndex}
-        onPanelClick={() => setToggleSearch(false)}
+        onPanelClick={onCloasePanel}
         open={toggleSearch}
       />
       <Container>
@@ -56,6 +61,9 @@ const Board = () => {
           ref={boardRef}
           selected={selectedIndex}
           onFrameEvent={onFrameEvent}
+          onDragEnd={() => {
+            setSeletectIndex(-1);
+          }}
         />
       </Container>
     </>

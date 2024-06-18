@@ -2,7 +2,7 @@ import { useEffect, useContext, useState, forwardRef } from "react";
 import { BoardFrame, BoardCell } from "./Frame.styled";
 import AlbumContext from "../../context/AlbumContext";
 
-const Frame = forwardRef(({ onFrameEvent, selected }, ref) => {
+const Frame = forwardRef(({ onFrameEvent, selected, onDragEnd }, ref) => {
   const { albums, setAlbums } = useContext(AlbumContext);
   const [swapIndex, setSwapIndex] = useState(-1);
 
@@ -44,6 +44,7 @@ const Frame = forwardRef(({ onFrameEvent, selected }, ref) => {
     onFrameEvent("swap", end);
 
     setAlbums(copied);
+    onDragEnd();
   };
 
   const getColumns = (index) => {
@@ -70,7 +71,7 @@ const Frame = forwardRef(({ onFrameEvent, selected }, ref) => {
             onDrop={(e) => handleDrop(e, key)}
             onDragOver={handleDragOver}
             style={item && { background: `url(${item.thumbnail[0].url})` }}
-            onClick={() => onFrameEvent("click", key)}
+            onClick={() => !item && onFrameEvent("click", key)}
           ></BoardCell>
         );
       })}

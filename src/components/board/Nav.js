@@ -11,9 +11,9 @@ const Nav = ({ onToggleSearch, onToggleOption, onDownload }) => {
       >
         <Search />
       </IconContainer>
-      <IconContainer style={{ marginRight: "5px" }}>
+      {/* <IconContainer style={{ marginRight: "5px" }}>
         <Settings />
-      </IconContainer>
+      </IconContainer> */}
       <IconContainer onClick={() => onDownload()}>
         <Download />
       </IconContainer>
