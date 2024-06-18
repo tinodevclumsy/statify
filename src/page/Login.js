@@ -25,11 +25,8 @@ const Login = () => {
         redirect_uri: redirectUri,
       };
 
-      console.log(params);
-
       authUrl.search = new URLSearchParams(params).toString();
-      console.log(authUrl.toString());
-      // window.location.href = authUrl.toString();
+      window.location.href = authUrl.toString();
     } catch (error) {
       console.error("Error fetching data:", error);
     }
