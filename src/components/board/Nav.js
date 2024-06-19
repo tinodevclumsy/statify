@@ -1,6 +1,6 @@
 import { BoardNav } from "./Nav.styled";
 import IconContainer from "../common/Icon";
-import { Settings, Search, Download } from "react-feather";
+import { Search, Download } from "react-feather";
 
 const Nav = ({ onToggleSearch, onToggleOption, onDownload }) => {
   return (

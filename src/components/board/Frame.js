@@ -17,6 +17,8 @@ const Frame = forwardRef(({ onFrameEvent, selected, onDragEnd }, ref) => {
     return () => {
       setAlbums([]);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDragStart = (index) => {
