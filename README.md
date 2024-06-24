@@ -4,15 +4,15 @@ A project using the Spotify API to generate a topster from personal playlists, v
 
 ### Set up environment variables
 
-   - Create a project and get a client id from Spotify Developer Dashboard
-     <https://developer.spotify.com/documentation/web-api/concepts/apps/>
-   - Create a `.env` file in the root directory of the project.
-   - Refer to the `.env.example` file and set up the required environment variables in the `.env` file.
+- Create a project and get a client id from Spotify Developer Dashboard
+  <https://developer.spotify.com/documentation/web-api/concepts/apps/>
+- Create a `.env` or `.env.local` file in the root directory of the project.
+- Set up the required environment variables in the related `.env` file.
 
-   ```plaintext
-   REACT_APP_CLIENT_ID=your_client_id
-   REACT_APP_SITE_URL=your_api_key_here (http://localhost:3000)
-   ```
+```plaintext
+REACT_APP_CLIENT_ID=your_client_id
+REACT_APP_SITE_URL=your_site_url (http://localhost:3000)
+```
 
 ### Pages
 
