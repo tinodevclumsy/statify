@@ -57,7 +57,7 @@ const PlayListDetail = () => {
           <ListNav>
             <InputSearch onSearch={setTerm} />
           </ListNav>
-          <TrackList data={filterTracks(term)} />
+          <TrackList data={filterTracks(term)} totalCount={tracks.length}  />
           <Background
             style={{ backgroundImage: `url(${playlistDetail.thumbnail})` }}
           />
