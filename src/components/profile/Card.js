@@ -11,7 +11,11 @@ const ProfileCard = () => {
       {profile && (
         <Card>
           <ProfileImage>
-            <img src={profile.images[1].url} alt="User Profile" />
+            <img
+              style={{ width: "100%" }}
+              src={profile.images[1].url}
+              alt="User Profile"
+            />
           </ProfileImage>
           <UserName>{profile.display_name}</UserName>
           <a href={profile.uri} target="_blank" rel="noreferrer">

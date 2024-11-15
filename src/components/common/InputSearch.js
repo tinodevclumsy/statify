@@ -23,7 +23,7 @@ const Icon = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  padding: 10px;
+  padding: 7px;
   background-color: inherit;
   color: ${(props) => props.theme.white};
   border-top-right-radius: inherit;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Button = styled.button`
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   background-color: ${(props) => props.theme.primary};
   border: 1px solid ${(props) => props.theme.primary};
   border-radius: ${(props) => props.theme.buttonRadius};
@@ -17,8 +17,8 @@ const Button = styled.button`
 `;
 
 export const LinkButton = styled(Button)`
-  width: 175px;
-  padding: 10px 15px;
+  width: 150px;
+  padding: 5px 15px;
 `;
 
 export const SignOutButton = styled(Button)`

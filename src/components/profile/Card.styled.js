@@ -13,8 +13,8 @@ export const Card = styled.div`
 
 export const ProfileImage = styled.div`
   overflow: hidden;
-  width: 125px;
-  height: 125px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   margin: auto;
 `;
