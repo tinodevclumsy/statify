@@ -1,6 +1,6 @@
 import usePagination from "../../hooks/usePagination";
 import styled from "styled-components";
-
+import { ChevronRight, ChevronLeft } from "react-feather";
 const PaginationContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -17,23 +17,27 @@ const PaginationBlock = styled.button`
   color: ${(props) => props.theme.white};
   background-color: ${(props) =>
     props.$current === "true" ? props.theme.primary : props.theme.dark};
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
 
 const Pagination = ({
-  totalCount,
-  currentPage = 1,
+  totalPages,
+  currentPage = 0,
   perPage = 10,
   onPageChange,
 }) => {
-  const { totalPages } = usePagination({
-    totalCount,
-    currentPage,
-    perPage,
-    onPageChange,
-  });
 
   return (
     <PaginationContainer>
+      <PaginationBlock
+        disabled={currentPage === 0}
+        onClick={() => onPageChange(currentPage - 1)}
+      >
+        <ChevronLeft size={12} />
+      </PaginationBlock>
       {Array.from({ length: totalPages }).map((_, index) => (
         <PaginationBlock
           $current={(index === currentPage).toString()}
@@ -44,6 +48,12 @@ const Pagination = ({
           {index + 1}
         </PaginationBlock>
       ))}
+      <PaginationBlock
+        disabled={currentPage === totalPages - 1}
+        onClick={() => onPageChange(currentPage + 1)}
+      >
+        <ChevronRight size={12} />
+      </PaginationBlock>
     </PaginationContainer>
   );
 };

@@ -1,12 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import TrackListItem from "./Item";
 import AlbumContext from "../../context/AlbumContext";
 import { TableHeader, TableRow } from "../common/Table";
 import CheckBox from "../common/Checkbox";
 import Pagination from "../common/Pagination";
+import usePagination from "../../hooks/usePagination";
+
 const TrackList = ({ data, totalCount }) => {
   const { albums, setAlbums } = useContext(AlbumContext);
-  const [page, setPage] = useState(0);
+  const { page, goToPage, totalPages } = usePagination({
+    totalCount: data.length,
+    perPage: 10,
+  });
 
   const paginatedTracks = () => {
     return data.slice(page * 10, (page + 1) * 10);
@@ -23,11 +28,6 @@ const TrackList = ({ data, totalCount }) => {
 
   const checkAll = () => {
     return albums.length === data.length;
-  };
-
-  const onPageChange = (index) => {
-    console.log("click", index);
-    setPage(index);
   };
 
   return (
@@ -52,8 +52,8 @@ const TrackList = ({ data, totalCount }) => {
       </table>
 
       <Pagination
-        totalCount={data.length}
-        onPageChange={onPageChange}
+        totalPages={totalPages}
+        onPageChange={(index) => goToPage(index)}
         currentPage={page}
       />
     </div>
